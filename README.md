@@ -1,2 +1,2 @@
 # Lynko-Reto
-Lynko es una plataforma educatim
+Lynko es una plataforma educativa para mejorar la educación.
