@@ -1,0 +1,86 @@
+CREATE DATABASE lynko;
+
+\c lynko;
+
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(100) NOT NULL,
+    puntaje INT DEFAULT 0,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE materias (
+    id_materia SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+
+INSERT INTO materias (nombre) VALUES 
+('Matemáticas'),
+('Español'),
+('Biología');
+
+CREATE TABLE preguntas (
+    id_pregunta SERIAL PRIMARY KEY,
+    pregunta TEXT NOT NULL,
+    id_materia INT,
+    nivel INT DEFAULT 1,
+    FOREIGN KEY (id_materia) REFERENCES materias(id_materia)
+);
+
+CREATE TABLE opciones (
+    id_opcion SERIAL PRIMARY KEY,
+    opcion TEXT NOT NULL,
+    es_correcta BOOLEAN DEFAULT FALSE,
+    id_pregunta INT,
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta)
+);
+
+CREATE TABLE progreso (
+    id_progreso SERIAL PRIMARY KEY,
+    id_usuario INT,
+    id_pregunta INT,
+    correcta BOOLEAN,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta)
+);
+
+CREATE TABLE examenes (
+    id_examen SERIAL PRIMARY KEY,
+    id_usuario INT,
+    fecha DATE,
+    materia INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+
+
+INSERT INTO usuarios (nombre, correo, contraseña) VALUES
+('Maria', 'maria@gmail.com', '1234');
+
+
+INSERT INTO preguntas (pregunta, id_materia) VALUES
+('¿Cuánto es 2 + 2?', 1),
+('¿Cuál es un sustantivo?', 2),
+('¿Qué órgano bombea la sangre?', 3);
+
+
+INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
+('3', false, 1),
+('4', true, 1),
+('5', false, 1);
+
+
+INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
+('Correr', false, 2),
+('Casa', true, 2),
+('Rápido', false, 2);
+
+
+INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
+('Pulmón', false, 3),
+('Corazón', true, 3),
+('Hígado', false, 3);
