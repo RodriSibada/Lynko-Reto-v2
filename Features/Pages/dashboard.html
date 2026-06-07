@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lynko</title>
+    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="../img/logo.png" alt="Lynko" class="logo-small">
+                <span class="logo-text">Lynko</span>
+            </div>
+
+            <!-- Información del usuario -->
+            <div class="user-info">
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value" id="puntaje-total">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value" id="racha">0</span>
+                    </div>
+                </div>
+
+                <!-- Menú usuario -->
+                <button class="user-menu" id="user-menu-btn">
+                    <span id="nombre-usuario">Usuario</span>
+                    <span class="dropdown-icon">▼</span>
+                </button>
+
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="perfil.html" class="dropdown-item">👤 Perfil</a>
+                    <a href="configuracion.html" class="dropdown-item">⚙️ Configuración</a>
+                    <hr>
+                    <button class="dropdown-item logout-btn" id="logout-btn">🚪 Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="dashboard-container">
+        <!-- SECCIÓN: MATERIAS DISPONIBLES -->
+        <section class="materias-section">
+            <h2>Elige una materia para aprender</h2>
+
+            <div class="materias-grid" id="materias-grid">
+                <!-- Se carga dinámicamente con JavaScript -->
+                <div class="materia-card loading">
+                    <div class="skeleton"></div>
+                </div>
+                <div class="materia-card loading">
+                    <div class="skeleton"></div>
+                </div>
+                <div class="materia-card loading">
+                    <div class="skeleton"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: RUTA DE APRENDIZAJE (cuando selecciona una materia) -->
+        <section class="ruta-section" id="ruta-section" style="display: none;">
+            <button class="back-btn" id="back-btn">← Volver a materias</button>
+
+            <h2 id="materia-titulo">Título de la materia</h2>
+            
+            <!-- RUTA VISUAL DE NIVELES -->
+            <div class="ruta-visual">
+                <div class="ruta-container" id="ruta-container">
+                    <!-- Se carga dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: EJERCICIO (cuando selecciona un nivel) -->
+        <section class="ejercicio-section" id="ejercicio-section" style="display: none;">
+            <button class="back-btn" id="back-btn-ejercicio">← Volver</button>
+
+            <div class="ejercicio-container">
+                <div class="progreso-ejercicio">
+                    <div class="progreso-bar">
+                        <div class="progreso-fill" id="progreso-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="progreso-texto" id="progreso-texto">1/10</span>
+                </div>
+
+                <div class="pregunta-card">
+                    <h3 id="pregunta-texto">Cargando pregunta...</h3>
+
+                    <div class="opciones" id="opciones-container">
+                        <!-- Se cargan dinámicamente -->
+                    </div>
+
+                    <div class="botones-ejercicio">
+                        <button class="btn-siguiente" id="btn-siguiente" disabled>
+                            Siguiente →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PANEL DE INFORMACIÓN -->
+                <div class="info-panel">
+                    <div class="info-item">
+                        <span class="info-label">Aciertos</span>
+                        <span class="info-value" id="aciertos">0/10</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Racha</span>
+                        <span class="info-value" id="racha-actual">0 🔥</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">XP Ganado</span>
+                        <span class="info-value" id="xp-ganado">0 ⭐</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE RESULTADO -->
+    <div class="modal" id="modal-resultado">
+        <div class="modal-content">
+            <div class="resultado-icon" id="resultado-icon">✓</div>
+            <h2 id="resultado-titulo">¡Correcto!</h2>
+            <p id="resultado-mensaje">Excelente trabajo</p>
+            <div class="resultado-xp" id="resultado-xp">+10 XP</div>
+            <button class="btn-modal" id="btn-continuar">Continuar</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
