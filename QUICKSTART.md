@@ -93,6 +93,10 @@ Prueba endpoints:
 | `CORS error` | Normal, el servidor tiene CORS habilitado |
 | `Email ya registrado` | Usa otro email o borra en pgAdmin |
 
+Error de versión de bcrypt = pip install bcrypt==3.2.2
+
+Error con requirements.txt = pip install fastapi uvicorn sqlalchemy psycopg2-binary pydantic email-validator python-jose passlib bcrypt python-multipart cryptography --no-cache-dir
+
 ## 📁 Archivos importantes
 
 - `database.py` - Conexión BD
@@ -115,4 +119,6 @@ Prueba endpoints:
 - [ ] Usuario aparece en pgAdmin
 
 ---
+
+
 
