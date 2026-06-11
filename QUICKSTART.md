@@ -23,6 +23,38 @@ Confirma que `DATABASE_URL` coincide con tu PostgreSQL:
 DATABASE_URL = "postgresql://postgres:password@localhost:5432/LynkoReto"
 ```
 
+-- En la base de datos NUEVA (lynko_nueva), ejecuta:
+
+CREATE SCHEMA IF NOT EXISTS public;
+
+CREATE TABLE IF NOT EXISTS public.users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    xp INTEGER DEFAULT 0,
+    level INTEGER DEFAULT 1,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON public.users(email);
+
+CREATE OR REPLACE FUNCTION update_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_update_users_updated_at ON public.users;
+CREATE TRIGGER trigger_update_users_updated_at
+BEFORE UPDATE ON public.users
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at();
+
 ## 4️⃣ Ejecutar servidor FastAPI (1 min)
 
 ```bash
@@ -81,4 +113,3 @@ Prueba endpoints:
 
 ---
 
-**Si todo funciona:** 🎉 ¡Listo para conectar el dashboard!
