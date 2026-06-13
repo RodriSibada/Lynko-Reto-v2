@@ -1,10 +1,4 @@
-/*Se ha implementado la hoja de estilos base para la interfaz de usuario del 
-**Dashboard Educativo**. El diseño utiliza una paleta de colores cálida 
-(tonos naranja y fondos claros) enfocada en la gamificación para mantener el interés visual del usuario.
-- Define las variables de entorno de color (--orange-primary, --bg-main, etc.).
-- Añade estilos estructurales para el sidebar y el contenedor principal.
-- Implementa componentes interactivos: tarjetas de materias, barras de progreso y sistema de recompensas.
-- Añade un diseño adaptado para filtros y cuadrícula de actividades.*/
+
 
 :root {
             --orange-primary: #FF7A00;
@@ -25,10 +19,15 @@
         }
 
         body {
+            
             background-color: var(--bg-main);
             color: var(--text-dark);
             display: flex;
             min-height: 100vh;
+              font-family: "DM Sans", sans-serif;
+              font-optical-sizing: auto;
+              font-weight: normal;
+              font-style: normal;
         }
 
         
