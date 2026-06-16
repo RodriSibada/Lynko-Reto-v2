@@ -160,7 +160,7 @@ async function submitQuiz(answers) {
 }
 ```
 
-## Archivo HTML completo (ejemplo)
+## Archivo HTML completo 
 
 ```html
 <!DOCTYPE html>
