@@ -1,0 +1,109 @@
+.admin-layout {
+            display: grid;
+            grid-template-columns: 2fr 1.2fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .full-width-section {
+            grid-column: span 2;
+            margin-top: 15px;
+        }
+        .admin-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 25px;
+        }
+        .admin-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .admin-card h3 i {
+            color: var(--orange-primary);
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+        .modern-table th {
+            background-color: var(--orange-light);
+            color: var(--orange-dark);
+            padding: 12px 16px;
+            font-weight: 800;
+            border-bottom: 2px solid #FFE0C2;
+        }
+        .modern-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #F5F5F5;
+            color: var(--text-dark);
+        }
+        .modern-table tr:hover td {
+            background-color: #FFFDFB;
+        }
+       
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid #E0E0E0;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--orange-primary);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .btn-delete {
+            color: #D32F2F;
+            font-weight: 700;
+            text-decoration: none;
+            background: #FFEBEE;
+            padding: 5px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .btn-delete:hover {
+            background: #FFCDD2;
+        }
+        .alert-success {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-left: 5px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }

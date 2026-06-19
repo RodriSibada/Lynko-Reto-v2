@@ -1,4 +1,10 @@
-  
+/*Se ha implementado la hoja de estilos base para la interfaz de usuario del 
+**Dashboard Educativo**. El diseño utiliza una paleta de colores cálida 
+(tonos naranja y fondos claros) enfocada en la gamificación para mantener el interés visual del usuario.
+- Define las variables de entorno de color (--orange-primary, --bg-main, etc.).
+- Añade estilos estructurales para el sidebar y el contenedor principal.
+- Implementa componentes interactivos: tarjetas de materias, barras de progreso y sistema de recompensas.
+- Añade un diseño adaptado para filtros y cuadrícula de actividades.*/
 
 :root {
             --orange-primary: #FF7A00;
@@ -19,15 +25,10 @@
         }
 
         body {
-            
             background-color: var(--bg-main);
             color: var(--text-dark);
             display: flex;
             min-height: 100vh;
-              font-family: "DM Sans", sans-serif;
-              font-optical-sizing: auto;
-              font-weight: normal;
-              font-style: normal;
         }
 
         
@@ -283,7 +284,7 @@
             font-weight: bold;
         }
 
-      
+        
         .hero-section {
             display: grid;
             grid-template-columns: 1.2fr 2.8fr;
@@ -379,7 +380,6 @@
             line-height: 1.3;
         }
 
-     
         .progress-bar-container {
             background: #EEEEEE;
             border-radius: 10px;
@@ -488,7 +488,7 @@
             margin-bottom: 8px;
         }
 
-        /* Recompensas Recientes */
+        
         .reward-item {
             display: flex;
             align-items: center;
@@ -513,7 +513,7 @@
             color: var(--text-muted);
         }
 
-       
+        
         .activity-box {
             background: #FFF9F3;
             border: 2px dashed #FFD4B2;
@@ -550,7 +550,7 @@
             margin-top: 2px;
         }
 
-        
+       
         .btn-secondary {
             background: transparent;
             border: 1px solid var(--orange-primary);
@@ -605,7 +605,7 @@
             border-radius: 10px;
         }
 
-       
+        
         .bottom-banner {
             background: #FFF2E6;
             border-radius: var(--border-radius);
@@ -748,8 +748,45 @@
             border-radius: 12px;
             font-weight: 800;
         }
+
+        .settings-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            border: 1px solid #F0F0F0;
+            max-width: 600px;
+        }
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-control {
+            width: 50px;
+            height: 26px;
+            background: #4CAF50;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        .toggle-control::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            right: 3px;
+        }
         .status-locked { background: #E0E0E0; color: #757575; }
         .status-available { background: #E8F5E9; color: #2E7D32; }
         .status-completed { background: #E3F2FD; color: #1565C0; }
 
-        
+               
