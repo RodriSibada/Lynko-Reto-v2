@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynko - Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/registro.css">
+
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-logo"><img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png"></div>
+        <h1>¡Únete a Lynko!</h1>
+        <p>Crea tu cuenta gratis y empieza la aventura</p>
+        <form action="/registro" method="POST">
+            {% if error %}
+            <p style="color: #D32F2F; font-weight: 700; font-size: 14px; text-align: center;">{{ error }}</p>
+            {% endif %}
+
+            <div class="form-group">
+                <label>Tu Nombre</label>
+                <input type="text" name="nombre" placeholder="¿Cómo te llamas?" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" name="correo" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="contrasena" placeholder="Crea una contraseña segura" required>
+            </div>
+            
+            <button type="submit" class="btn-auth">Registrarse</button>
+
+        </form>
+        <div class="auth-footer">
+            ¿Ya tienes una cuenta? <a href="Login.html">Inicia sesión</a>
+        </div>
+    </div>
+
+</body>
+</html>

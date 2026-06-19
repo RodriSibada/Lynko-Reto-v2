@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynko - Iniciar Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-logo"><img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png" ></div>
+        <h1>¡Hola otra vez!</h1>
+        <p>Ingresa tus datos para continuar aprendiendo</p>
+        
+        <form action="/login" method="POST">
+            {% if error %}
+            <p style="color: #D32F2F; font-weight: 700; font-size: 14px; text-align: center;">{{ error }}</p>
+            {% endif %}
+            
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" name="correo" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="contrasena" placeholder="Ingresa tu contraseña" required>
+            </div>
+                <button type="submit" class="btn-auth">Ingresar</button>
+
+
+        </form>
+
+        <div class="auth-footer">
+            ¿Eres nuevo por aquí? <a href="Registro.html">Regístrate gratis</a>
+        </div>
+    </div>
+
+</body>
+</html>

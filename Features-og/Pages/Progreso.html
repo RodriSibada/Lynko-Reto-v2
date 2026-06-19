@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynko - Mi Progreso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/progreso.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    
+</head>
+<body>
+
+    
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo-container">
+                <div class="logo-placeholder"><img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png"></div>
+                <p>Aprender nunca fue tan divertido</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="inicio_lynko.html"><i>🏠</i> Inicio</a></li>
+                <li class="nav-item"><a href="Materias.html"><i>📖</i> Materias</a></li>
+                <li class="nav-item"><a href="Actividades.html"><i>✏️</i> Actividades</a></li>
+                <li class="nav-item active"><a href="Progreso.html"><i>📈</i> Mi progreso</a></li>
+                <li class="nav-item"><a href="Recompensas.html"><i>🏆</i> Recompensas</a></li>
+                <li class="nav-item"><a href="Perfil.html"><i>👤</i> Perfil</a></li>
+                <li class="nav-item"><a href="Ajustes.html"><i>⚙️</i> Ajustes</a></li>
+            </ul>
+        </div>
+        <div class="streak-card">
+            <div class="streak-fire">🔥</div>
+            <div class="streak-info"><span>Racha de estudio</span><strong>7 días</strong><span style="color: var(--orange-primary);">¡Sigue así!</span></div>
+        </div>
+    </aside>
+
+   
+    <main class="main-content">
+        <header class="header-top">
+            <div class="welcome-text">
+                <h1>Mi Progreso General 📈</h1>
+                <p>¡Mira cuánto has crecido e aprendido esta semana!</p>
+            </div>
+            <div class="user-status"><div class="profile-badge"><div class="avatar-placeholder"></div><div class="info"><p>Sofía</p><span>Nivel 3 ➔</span></div></div><div class="points-badge">⭐ 245 <span>puntos</span></div><button class="notification-btn">🔔<div class="notification-badge">2</div></button></div>
+        </header>
+
+        <section class="progress-dashboard">
+
+            <div class="info-card" style="justify-content: flex-start; gap: 20px;">
+                <h3 class="card-title">Resumen de Cuenta</h3>
+                <div style="display: flex; justify-content: center; padding: 10px 0;">
+                    <div class="circular-progress" style="width: 120px; height: 120px; background: conic-gradient(var(--orange-primary) 216deg, #F0F0F0 0deg);">
+                        <div class="circular-progress::before" style="width: 95px; height: 95px;"></div>
+                        <div class="progress-value" style="font-size: 22px;">60% <span>Total General</span></div>
+                    </div>
+                </div>
+                <ul class="metrics-detailed-list">
+                    <li><span>Materias Completas</span> <span style="color: #4CAF50;">3/3</span></li>
+                    <li><span>Ejercicios Perfectos</span> <span>12</span></li>
+                    <li><span>Tiempo Total</span> <span>4h 30m</span></li>
+                    <li><span>Días Activos</span> <span>7 días seguidos</span></li>
+                </ul>
+            </div>
+
+
+            <div>
+                <div class="subject-performance-card">
+                    <div class="subject-perf-row">
+                        <strong>➕ Matemáticas</strong>
+                        <span style="color: #FF9F00; font-weight: 800;">75%</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-fill math-fill"></div></div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Excelente desempeño en Sumas. Próximo objetivo: Introducción a la Multiplicación.</p>
+                </div>
+
+                <div class="subject-performance-card">
+                    <div class="subject-perf-row">
+                        <strong>📖 Español</strong>
+                        <span style="color: #4CAF50; font-weight: 800;">60%</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-fill spanish-fill"></div></div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Gran fluidez lectora. Próximo reto: Identificación de adjetivos en textos.</p>
+                </div>
+
+                <div class="subject-performance-card">
+                    <div class="subject-perf-row">
+                        <strong>🧪 Biología</strong>
+                        <span style="color: #7E57C2; font-weight: 800;">40%</span>
+                    </div>
+                    <div class="progress-bar-container"><div class="progress-fill bio-fill"></div></div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Vas por buen camino conociendo los animales. Próximo reto: El Reino de las Plantas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

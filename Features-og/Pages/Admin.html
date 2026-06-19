@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynko - Panel de Administración</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="/static/adim.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png" alt="Lynko Logo">
+                </div>
+                <p>Panel de Control Central</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="/admin"><i>📊</i> Analíticas e Hitos</a>
+                </li>
+            </ul>
+        </div>
+        <div style="padding: 20px;">
+            <a href="/login" style="color: white; text-decoration: none; font-weight: 700; font-size: 14px;">
+                <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión Admin
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="top-header">
+            <div class="welcome-text">
+                <h2>Panel de Administración General</h2>
+                <p>Monitorea el rendimiento de asignaturas, gestiona bancos de preguntas y audita alumnos.</p>
+            </div>
+        </header>
+
+        {% if msg %}
+        <div class="alert-success">
+            <i class="fa-solid fa-circle-check"></i> {{ msg }}
+        </div>
+        {% endif %}
+
+        <div class="admin-layout">
+            
+            <div class="admin-card">
+                <h3><i class="fa-solid fa-chart-bar"></i> Rendimiento por Asignatura</h3>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Asignatura</th>
+                                <th>Intentos Totales</th>
+                                <th>Promedio de Nota</th>
+                                <th>Estudiantes Aprobados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mat in metricas_materias %}
+                            <tr>
+                                <td><strong>{{ mat[0] }}</strong></td>
+                                <td>{{ mat[1] }}</td>
+                                <td>{{ mat[2] }}%</td>
+                                <td>{{ mat[3] }} alumnos</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h3><i class="fa-solid fa-square-plus"></i> Registrar Pregunta</h3>
+                <form action="/admin/preguntas/crear" method="POST">
+                    <div class="form-group">
+                        <label>Texto del Enunciado</label>
+                        <input type="text" name="pregunta" placeholder="Ej: ¿Cuál es el resultado de 8x7?" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Asignatura Relacionada</label>
+                        <select name="id_materia" class="form-input">
+                            <option value="1">Matemáticas</option>
+                            <option value="2">Español</option>
+                            <option value="3">Biología</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Dificultad (1 al 5)</label>
+                            <input type="number" name="nivel" min="1" max="5" value="1" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Puntos de Recompensa</label>
+                            <input type="number" name="puntos" value="10" min="1" class="form-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Opción A</label>
+                        <input type="text" name="opcion1" class="form-input" placeholder="Primera alternativa" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Opción B</label>
+                        <input type="text" name="opcion2" class="form-input" placeholder="Segunda alternativa" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Opción C</label>
+                        <input type="text" name="opcion3" class="form-input" placeholder="Tercera alternativa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Selecciona la Opción Correcta</label>
+                        <select name="correcta" class="form-input">
+                            <option value="1">Opción A</option>
+                            <option value="2">Opción B</option>
+                            <option value="3">Opción C</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar Pregunta Completa
+                    </button>
+                </form>
+            </div>
+
+            <div class="admin-card full-width-section">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de Exámenes Realizados</h3>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Evaluación</th>
+                                <th>Materia</th>
+                                <th>Calificación Obtenida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for examen in mejores_examenes %}
+                            <tr>
+                                <td>{{ examen[0] }}</td>
+                                <td>{{ examen[1] }}</td>
+                                <td>{{ examen[2] }}</td>
+                                <td><strong>{{ examen[3] }} / 100</strong></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-card full-width-section">
+                <h3><i class="fa-solid fa-boxes-stacked"></i> Banco de Preguntas Guardadas</h3>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Código ID</th>
+                                <th>Enunciado Base de la Pregunta</th>
+                                <th>Área Académica</th>
+                                <th>Complejidad</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for preg in preguntas %}
+                            <tr>
+                                <td>#{{ preg[0] }}</td>
+                                <td>{{ preg[1] }}</td>
+                                <td>{{ preg[2] }}</td>
+                                <td>Nivel {{ preg[3] }}</td>
+                                <td>
+                                    <a href="/admin/preguntas/borrar/{{ preg[0] }}" class="btn-delete">
+                                        <i class="fa-solid fa-trash"></i> Quitar
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-card full-width-section">
+                <h3><i class="fa-solid fa-user-graduate"></i> Control de Alumnos Registrados</h3>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>ID Usuario</th>
+                                <th>Nombre Completo</th>
+                                <th>Correo Electrónico</th>
+                                <th>Puntaje de Experiencia Acumulado</th>
+                                <th>Medallas Obtenidas</th>
+                                <th>Operación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for alumno in usuarios %}
+                            <tr>
+                                <td>#{{ alumno[0] }}</td>
+                                <td><strong>{{ alumno[1] }}</strong></td>
+                                <td>{{ alumno[2] }}</td>
+                                <td>{{ alumno[3] }} EXP</td>
+                                <td><i class="fa-solid fa-medal" style="color: #FFD700;"></i> {{ alumno[4] }} Logros</td>
+                                <td>
+                                    <a href="/admin/estudiantes/eliminar/{{ alumno[0] }}" class="btn-delete">
+                                        <i class="fa-solid fa-user-minus"></i> Dar de Baja
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

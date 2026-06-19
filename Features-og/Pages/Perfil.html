@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynko - Mi Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/perfil.css">
+    <link rel="stylesheet" href="/static/styles.css">
+
+   
+</head>
+<body>
+
+    
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo-container">
+                <div class="logo-placeholder"><img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png"></div>
+                <h2>Lynko</h2>
+                <p>Aprender nunca fue tan divertido</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="inicio_lynko.html"><i>🏠</i> Inicio</a></li>
+                <li class="nav-item"><a href="Materias.html"><i>📖</i> Materias</a></li>
+                <li class="nav-item"><a href="Actividades.html"><i>✏️</i> Actividades</a></li>
+                <li class="nav-item"><a href="Progreso.html"><i>📈</i> Mi progreso</a></li>
+                <li class="nav-item"><a href="Recompensas.html"><i>🏆</i> Recompensas</a></li>
+                <li class="nav-item active"><a href="Perfil.html"><i>👤</i> Perfil</a></li>
+                <li class="nav-item"><a href="Ajustes.html"><i>⚙️</i> Ajustes</a></li>
+            </ul>
+        </div>
+
+        <div class="streak-card">
+            <div class="streak-fire">🔥</div>
+            <div class="streak-info">
+                <span>Racha de estudio</span>
+                <strong>7 días</strong>
+                <span style="color: var(--orange-primary);">¡Sigue así!</span>
+            </div>
+        </div>
+    </aside>
+
+    
+    <main class="main-content">
+        
+        
+        <header class="header-top">
+            <div class="welcome-text">
+                <h1>Mi Perfil 👤</h1>
+                <p>¡Edita tus datos y dale estilo propio a tu personaje!</p>
+            </div>
+            
+            
+            <div class="user-status">
+                <div class="profile-badge">
+                    <div class="avatar-placeholder"></div>
+                    <div class="info">
+                        <p>Sofía</p>
+                        <span>Nivel 3 ➔</span>
+                    </div>
+                </div>
+                <div class="points-badge">
+                    ⭐ 245 <span>puntos</span>
+                </div>
+                <button class="notification-btn">
+                    🔔
+                    <div class="notification-badge">2</div>
+                </button>
+            </div>
+        </header>
+
+        
+        <section class="profile-layout">
+            
+            
+            <div class="profile-info-card">
+                
+                <div class="avatar-preview-big">👧</div>
+                
+                <h2 style="font-weight: 800; font-size: 22px; margin-bottom: 5px;">Sofía</h2>
+                <p style="color: var(--orange-primary); font-weight: 700; font-size: 14px; margin-bottom: 25px;">Estudiante Nivel 3</p>
+
+                
+                <div class="form-group">
+                    <label>Nombre de usuario</label>
+                    <input type="text" value="Sofía">
+                </div>
+
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" value="sofia@lynko.app" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" value="********">
+                </div>
+
+                <button class="btn-primary" style="margin-top: 15px;">Guardar cambios</button>
+            </div>
+
+           
+            <div class="avatar-creator-card">
+                <h3 style="font-weight: 800; font-size: 18px; margin-bottom: 15px;">🎨 Creador de Avatar</h3>
+                
+               
+                <div class="creator-tabs">
+                    <button class="tab-btn active">Tono de piel</button>
+                    <button class="tab-btn">Cabello</button>
+                    <button class="tab-btn">Ojos</button>
+                    <button class="tab-btn">Ropa</button>
+                </div>
+
+
+                <div class="options-grid">
+                    
+                    <div class="option-item selected">
+                        <div class="color-circle" style="background: #FFD2A8;"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="color-circle" style="background: #E0A96D;"></div>
+                    </div>
+                    
+                    <div class="option-item">
+                        <div class="color-circle" style="background: #8C6239;"></div>
+                    </div>
+                   
+                    <div class="option-item">
+                        <div class="color-circle" style="background: #F3E5AB;"></div>
+                    </div>
+                </div>
+
+                <h3 style="font-weight: 800; font-size: 14px; margin-bottom: 15px; color: var(--text-muted);">Estilos Disponibles</h3>
+                
+               
+                <div class="options-grid">
+                    <div class="option-item">👦</div>
+                    <div class="option-item">👧</div>
+                    <div class="option-item">👱‍♀️</div>
+                    <div class="option-item">🧑‍🦱</div>
+                    <div class="option-item">🕶️</div>
+                    <div class="option-item">👑</div>
+                    <div class="option-item">🧢</div>
+                    <div class="option-item">🎀</div>
+                </div>
+
+                <button class="btn-secondary">Restablecer avatar</button>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

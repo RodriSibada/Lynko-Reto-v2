@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <div class="logo-container">
+                <div class="logo-placeholder"><img src="https://cdn.phototourl.com/free/2026-06-08-2a556232-b138-49a7-a830-66b7ce8a4f19.png"></div>
+                <p>Aprender nunca fue tan divertido</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="inicio_lynko.html"><i>🏠</i> Inicio</a></li>
+                <li class="nav-item"><a href="Materias.html"><i>📖</i> Materias</a></li>
+                <li class="nav-item active"><a href="Actividades.html"><i>✏️</i> Actividades</a></li>
+                <li class="nav-item"><a href="Progreso.html"><i>📈</i> Mi progreso</a></li>
+                <li class="nav-item"><a href="Recompensas.html"><i>🏆</i> Recompensas</a></li>
+                <li class="nav-item"><a href="Perfil.html"><i>👤</i> Perfil</a></li>
+                <li class="nav-item"><a href="Ajustes.html"><i>⚙️</i> Ajustes</a></li>
+            </ul>
+        </div>
+
+        <div class="streak-card">
+            <div class="streak-fire">🔥</div>
+            <div class="streak-info">
+                <span>Racha de estudio</span>
+                <strong>7 días</strong>
+                <span style="color: var(--orange-primary);">¡Sigue así!</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="header-top">
+            <div class="welcome-text">
+                <h1>Mis Actividades ✏️</h1>
+                <p>¡Elige un reto y demuestra lo que sabes!</p>
+            </div>
+            <div class="user-status">
+                <div class="profile-badge">
+                    <div class="avatar-placeholder"></div>
+                    <div class="info">
+                        <p>Sofía</p>
+                        <span>Nivel 3 ➔</span>
+                    </div>
+                </div>
+                <div class="points-badge">
+                    ⭐ 245 <span>puntos</span>
+                </div>
+                <button class="notification-btn">
+                    🔔
+                    <div class="notification-badge">2</div>
+                </button>
+            </div>
+        </header>
+
+        <section class="activities-filter">
+            <button class="filter-btn active">Todas</button>
+            <button class="filter-btn">Matemáticas</button>
+            <button class="filter-btn">Español</button>
+            <button class="filter-btn">Biología</button>
+        </section>
+
+        <section class="activities-grid">
+            
+            <div class="activity-card">
+                <div class="activity-header math-bg">
+                    <span>➕ Matemáticas</span>
+                    <span class="status-badge status-available">Disponible</span>
+                </div>
+                <div class="activity-body">
+                    <div>
+                        <h3>Suma divertida</h3>
+                        <p>Practica operaciones de suma utilizando divertidos elementos animados e interactivos.</p>
+                    </div>
+                    <div>
+                        <div class="activity-meta">
+                            <span>💎 +15 Puntos</span>
+                            <span>⏱️ 5 min</span>
+                        </div>
+                        <button class="btn-primary">¡Empezar reto!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-header spanish-bg">
+                    <span>📖 Español</span>
+                    <span class="status-badge status-completed">¡Hecho!</span>
+                </div>
+                <div class="activity-body">
+                    <div>
+                        <h3>Fábula del León</h3>
+                        <p>Lee la pequeña historia y responde las preguntas de comprensión lectora para ganar.</p>
+                    </div>
+                    <div>
+                        <div class="activity-meta">
+                            <span>💎 +20 Puntos</span>
+                            <span>⏱️ 10 min</span>
+                        </div>
+                        <button class="btn-secondary">Repasar actividad</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-header bio-bg" style="opacity: 0.7;">
+                    <span>🧪 Biología</span>
+                    <span class="status-badge status-locked">🔒 Bloqueado</span>
+                </div>
+                <div class="activity-body" style="opacity: 0.7;">
+                    <div>
+                        <h3>El Ciclo del Agua</h3>
+                        <p>Aprende cómo viaja el agua por nuestro planeta. Requiere alcanzar el Nivel 4.</p>
+                    </div>
+                    <div>
+                        <div class="activity-meta">
+                            <span>💎 +30 Puntos</span>
+                            <span>⏱️ 8 min</span>
+                        </div>
+                        <button class="btn-primary" disabled style="background: #CCC; box-shadow: none; cursor: not-allowed;">Bloqueado</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <div class="activity-header math-bg">
+                    <span>✖️ Matemáticas</span>
+                    <span class="status-badge status-available">Disponible</span>
+                </div>
+                <div class="activity-body">
+                    <div>
+                        <h3>Multiplicar saltando</h3>
+                        <p>Ayuda al personaje a cruzar el río resolviendo las tablas del 2 y del 3 correctamente.</p>
+                    </div>
+                    <div>
+                        <div class="activity-meta">
+                            <span>💎 +25 Puntos</span>
+                            <span>⏱️ 7 min</span>
+                        </div>
+                        <button class="btn-primary">¡Empezar reto!</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
