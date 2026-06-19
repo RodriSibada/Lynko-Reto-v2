@@ -3,84 +3,336 @@ CREATE DATABASE lynko;
 \c lynko;
 
 CREATE TABLE usuarios (
+
     id_usuario SERIAL PRIMARY KEY,
+
     nombre VARCHAR(100) NOT NULL,
+
     correo VARCHAR(100) UNIQUE NOT NULL,
-    contraseña VARCHAR(100) NOT NULL,
-    puntaje INT DEFAULT 0,
+
+    contraseña VARCHAR(255) NOT NULL, -- Longitud para contraseñas seguras o hashes
+
+    puntaje_total INT DEFAULT 0 CHECK (puntaje_total >= 0),
+
+    rol VARCHAR(20) DEFAULT 'estudiante' CHECK (rol IN ('estudiante', 'admin')),
+
+    activo BOOLEAN DEFAULT TRUE,
+
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
+
+
+
+
+
+CREATE TABLE sesiones (
+
+    id_sesion SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    token_sesion VARCHAR(255) UNIQUE NOT NULL,
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    fecha_expiracion TIMESTAMP NOT NULL,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+
+);
+
+
+
+
 
 CREATE TABLE materias (
+
     id_materia SERIAL PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL
+
+    nombre VARCHAR(50) UNIQUE NOT NULL,
+
+    descripcion TEXT,
+
+    icono VARCHAR(50) -- Nombre del icono o asset visual para la web
+
 );
 
 
-INSERT INTO materias (nombre) VALUES 
-('Matemáticas'),
-('Español'),
-('Biología');
+
 
 CREATE TABLE preguntas (
+
     id_pregunta SERIAL PRIMARY KEY,
+
+    id_materia INT NOT NULL,
+
     pregunta TEXT NOT NULL,
-    id_materia INT,
-    nivel INT DEFAULT 1,
-    FOREIGN KEY (id_materia) REFERENCES materias(id_materia)
+
+    nivel_dificultad INT DEFAULT 1 CHECK (nivel_dificultad BETWEEN 1 AND 5),
+
+    puntos_recompensa INT DEFAULT 10 CHECK (puntos_recompensa > 0),
+
+    FOREIGN KEY (id_materia) REFERENCES materias(id_materia) ON DELETE CASCADE
+
 );
+
+
+
 
 CREATE TABLE opciones (
+
     id_opcion SERIAL PRIMARY KEY,
+
+    id_pregunta INT NOT NULL,
+
     opcion TEXT NOT NULL,
+
     es_correcta BOOLEAN DEFAULT FALSE,
-    id_pregunta INT,
-    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta)
+
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta) ON DELETE CASCADE
+
 );
 
-CREATE TABLE progreso (
-    id_progreso SERIAL PRIMARY KEY,
-    id_usuario INT,
-    id_pregunta INT,
-    correcta BOOLEAN,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta)
-);
+
+
+
 
 CREATE TABLE examenes (
+
     id_examen SERIAL PRIMARY KEY,
-    id_usuario INT,
-    fecha DATE,
-    materia INT,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+
+    id_materia INT NOT NULL,
+
+    titulo VARCHAR(150) NOT NULL,
+
+    descripcion TEXT,
+
+    duracion_minutos INT DEFAULT 15 CHECK (duracion_minutos > 0),
+
+    puntaje_minimo_aprobatorio INT DEFAULT 60 CHECK (puntaje_minimo_aprobatorio BETWEEN 1 AND 100),
+
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_materia) REFERENCES materias(id_materia) ON DELETE CASCADE
+
 );
 
 
 
-INSERT INTO usuarios (nombre, correo, contraseña) VALUES
-('Maria', 'maria@gmail.com', '1234');
 
 
-INSERT INTO preguntas (pregunta, id_materia) VALUES
-('¿Cuánto es 2 + 2?', 1),
-('¿Cuál es un sustantivo?', 2),
-('¿Qué órgano bombea la sangre?', 3);
+CREATE TABLE preguntas_examen (
+
+    id_examen INT NOT NULL,
+
+    id_pregunta INT NOT NULL,
+
+    PRIMARY KEY (id_examen, id_pregunta),
+
+    FOREIGN KEY (id_examen) REFERENCES examenes(id_examen) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta) ON DELETE CASCADE
+
+);
 
 
-INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
-('3', false, 1),
-('4', true, 1),
-('5', false, 1);
 
 
-INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
-('Correr', false, 2),
-('Casa', true, 2),
-('Rápido', false, 2);
+
+CREATE TABLE intentos_examen (
+
+    id_intento SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_examen INT NOT NULL,
+
+    nota_final INT DEFAULT 0 CHECK (nota_final BETWEEN 0 AND 100), -- Escala de 0 a 100
+
+    aprobado BOOLEAN DEFAULT FALSE,
+
+    fecha_inicio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    fecha_fin TIMESTAMP, -- Al calcular la diferencia sabes cuánto tardó el niño
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_examen) REFERENCES examenes(id_examen) ON DELETE CASCADE
+
+);
 
 
-INSERT INTO opciones (opcion, es_correcta, id_pregunta) VALUES
-('Pulmón', false, 3),
-('Corazón', true, 3),
-('Hígado', false, 3);
+
+
+
+CREATE TABLE respuestas_usuario (
+
+    id_respuesta_user SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    id_intento INT NOT NULL, -- Amarrado al intento del examen
+
+    id_pregunta INT NOT NULL,
+
+    id_opcion_seleccionada INT NOT NULL,
+
+    es_correcta BOOLEAN NOT NULL,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_intento) REFERENCES intentos_examen(id_intento) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_opcion_seleccionada) REFERENCES opciones(id_opcion) ON DELETE CASCADE
+
+);
+
+
+
+
+
+CREATE TABLE historial_puntos (
+
+    id_historial SERIAL PRIMARY KEY,
+
+    id_usuario INT NOT NULL,
+
+    puntos_variacion INT NOT NULL, -- Puede ser positivo (+50) o negativo si hay penalizaciones
+
+    motivo VARCHAR(255) NOT NULL, -- Ej: 'Examen de Matemáticas aprobado', 'Bono diario'
+
+    fecha_cambio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+
+);
+
+
+
+
+
+CREATE TABLE logros (
+
+    id_logro SERIAL PRIMARY KEY,
+
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+
+    descripcion TEXT NOT NULL,
+
+    imagen_medalla VARCHAR(100) -- Ruta de la imagen del logro (ej: 'medalla_mate.png')
+
+);
+
+
+
+
+
+CREATE TABLE logros_usuario (
+
+    id_usuario INT NOT NULL,
+
+    id_logro INT NOT NULL,
+
+    fecha_desbloqueo TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id_usuario, id_logro),
+
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+
+    FOREIGN KEY (id_logro) REFERENCES logros(id_logro) ON DELETE CASCADE
+
+);
+
+
+
+
+
+CREATE INDEX idx_intentos_usuario ON intentos_examen(id_usuario);
+
+CREATE INDEX idx_respuestas_intento ON respuestas_usuario(id_intento);
+
+CREATE INDEX idx_puntos_usuario ON historial_puntos(id_usuario);
+
+
+
+
+INSERT INTO materias (nombre, descripcion, icono) VALUES 
+
+('Matemáticas', 'Aprende a sumar, restar y resolver acertijos numéricos.', 'pi-calculator'),
+
+('Español', 'Mejora tu lectura, ortografía y descubre grandes historias.', 'book-open'),
+
+('Biología', 'Explora la naturaleza, los animales y el cuerpo humano.', 'heart-pulse');
+
+
+
+INSERT INTO usuarios (nombre, correo, contraseña, rol) VALUES
+
+('Administrador Lynko', 'admin@lynko.com', 'Admin1234*', 'admin'),
+
+('Maria Gomez', 'maria@gmail.com', '1234', 'estudiante');
+
+
+
+
+
+INSERT INTO logros (nombre, descripcion, imagen_medalla) VALUES
+
+('Primeros Pasos', 'Te has registrado con éxito en Lynko.', 'badge_registro.png'),
+
+('Cerebro Matemático', 'Aprobaste tu primer examen de matemáticas con 100%.', 'badge_math.png');
+
+
+
+
+
+INSERT INTO preguntas (id_materia, pregunta, nivel_dificultad, puntos_recompensa) VALUES
+
+(1, '¿Cuánto es 15 + 12?', 1, 10),
+
+(1, 'Si Lynko tiene 5 manzanas y regala 2, ¿cuántas le quedan?', 1, 10),
+
+(2, '¿Cuál de las siguientes palabras es un verbo?', 1, 10),
+
+(3, '¿Qué gas respiramos los seres humanos de manera vital?', 1, 15);
+
+
+
+
+
+
+
+INSERT INTO opciones (id_pregunta, opcion, es_correcta) VALUES (1, '25', FALSE), (1, '27', TRUE), (1, '30', FALSE);
+
+
+
+INSERT INTO opciones (id_pregunta, opcion, es_correcta) VALUES (2, '3', TRUE), (2, '2', FALSE), (2, '4', FALSE);
+
+
+
+INSERT INTO opciones (id_pregunta, opcion, es_correcta) VALUES (3, 'Perro', FALSE), (3, 'Cantar', TRUE), (3, 'Bonito', FALSE);
+
+
+
+INSERT INTO opciones (id_pregunta, opcion, es_correcta) VALUES (4, 'Dióxido de Carbono', FALSE), (4, 'Oxígeno', TRUE), (4, 'Nitrógeno', FALSE);
+
+
+
+INSERT INTO examenes (id_materia, titulo, descripcion, duracion_minutos, puntaje_minimo_aprobatorio) VALUES
+
+(1, 'Evaluación Inicial de Sumas', 'Demuestra tus habilidades básicas con el Lince de Lynko', 10, 60);
+
+
+
+
+
+INSERT INTO preguntas_examen (id_examen, id_pregunta) VALUES 
+
+(1, 1),
+
+(1, 2); 
+
+
