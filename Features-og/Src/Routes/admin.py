@@ -109,3 +109,4 @@ def dar_baja_estudiante(id_usuario: int):
         finally:
             conn.close()
     return RedirectResponse(url=f"/admin?msg={msg}", status_code=303)
+
